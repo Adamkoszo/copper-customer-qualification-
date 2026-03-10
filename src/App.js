@@ -23,7 +23,7 @@ function App() {
                         const formattedContext = {
                             entityId: data.context.id,
                             entityType: data.type,
-                            data: { name: data.context.name || 'Customer' }
+                            data: { name: data.context.name || data.context.display_name || 'Customer' }
                         };
                         setCopperContext(formattedContext);
                         console.log('✅ Copper context loaded via window.Copper:', formattedContext);
@@ -66,10 +66,10 @@ function App() {
                         const sdk = window.Copper.init();
                         const data = await sdk.getContext();
                         if (data && data.context) {
-                            const formattedContext = {
+                                const formattedContext = {
                                 entityId: data.context.id,
                                 entityType: data.type,
-                                data: { name: data.context.name || 'Customer' }
+                                data: { name: data.context.name || data.context.display_name || 'Customer' }
                             };
                             setCopperContext(formattedContext);
                             console.log('✅ Copper context loaded after retry:', formattedContext);
