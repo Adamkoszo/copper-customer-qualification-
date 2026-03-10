@@ -103,19 +103,19 @@ function App() {
         {
             id: 'khr_status',
             question: '🔴 KHR státusza?',
-            options: ['Jó', 'Figyelmeztetés', 'Blokkolt'],
+            options: ['aktív', 'passzív', 'nem tudja', 'nincs negatív történet'],
             field: '[CREDIT] KHR Status'
         },
         {
             id: 'employment',
             question: '🔴 Foglalkoztatási helyzet?',
-            options: ['Féléves munkakontrakt+', 'GYED/GYES', 'Saját vállalkozás'],
+            options: ['próbaidő', 'határozott', 'határozatlan', '6 hónapnál rövidebb', 'Vállalkozás', 'szociális jövedelem(felsorolandó)'],
             field: '[INC] Foglalkoztatási Státusz'
         },
         {
             id: 'property_type',
             question: '🔴 Ingatlan típusa?',
-            options: ['Tégla', 'Vályog', 'Tanya/Nyaraló'],
+            options: ['lakás', 'ház', 'külterületi lakóingatlan'],
             field: '[PROP] Ingatlantípus'
         },
         {
@@ -139,7 +139,7 @@ function App() {
         {
             id: 'bank_preference',
             question: '🔴 Preferált bank?',
-            options: ['OTP', 'Erste', 'K&H', 'MBH', 'Bármely'],
+            options: ['OTP', 'Erste', 'K&H', 'MBH', 'CIB', 'Raiffeisen', 'UniCredit', 'Gránit', 'Bármely', 'Összes'],
             field: '[BANK] Preferált Bank'
         }
     ];
@@ -276,18 +276,15 @@ function App() {
         }
 
         // Employment
-        if (answers.employment === 'Saját vállalkozás') {
+        if (answers.employment === 'Vállalkozás') {
             score -= 15;
             issues.push('⚠️ Vállalkozás - szükséges 2+ év nyereség');
         }
 
         // Property type
-        if (answers.property_type === 'Vályog') {
-            score -= 25;
-            issues.push('⚠️ Vályog ingatlan - korlátozott bank választék');
-        } else if (answers.property_type === 'Tanya/Nyaraló') {
+        if (answers.property_type === 'külterületi lakóingatlan') {
             score -= 30;
-            issues.push('⚠️ Tanya/nyaraló - speciális elbírálás szükséges');
+            issues.push('⚠️ Külterületi lakóingatlan - speciális elbírálás és banki korlátozások (pl. Gránit Bank nem fogadja el, Erste bizonyos feltételekkel, MBH/OTP preferált)');
         }
 
         // JTM

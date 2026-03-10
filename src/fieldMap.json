@@ -1,0 +1,310 @@
+[
+  {
+    "id": 736353,
+    "name": "[F] Hitelösszeg"
+  },
+  {
+    "id": 736354,
+    "name": "[F] Vételár"
+  },
+  {
+    "id": 736355,
+    "name": "[F] Jutalék"
+  },
+  {
+    "id": 736356,
+    "name": "[F] THM"
+  },
+  {
+    "id": 736357,
+    "name": "[F] Kamat"
+  },
+  {
+    "id": 736358,
+    "name": "[F] Futamidő (év)"
+  },
+  {
+    "id": 736359,
+    "name": "[B] Éves díj"
+  },
+  {
+    "id": 736360,
+    "name": "[B] Kötvény szám"
+  },
+  {
+    "id": 736361,
+    "name": "[B] Évforduló"
+  },
+  {
+    "id": 736362,
+    "name": "[M] Metrics"
+  },
+  {
+    "id": 736363,
+    "name": "[M] Economic Buyer"
+  },
+  {
+    "id": 736364,
+    "name": "[M] Decision Criteria"
+  },
+  {
+    "id": 736365,
+    "name": "[M] Decision Process"
+  },
+  {
+    "id": 736366,
+    "name": "[M] Paper Process"
+  },
+  {
+    "id": 736367,
+    "name": "[M] Implicate the Pain"
+  },
+  {
+    "id": 736368,
+    "name": "[M] Champion"
+  },
+  {
+    "id": 736369,
+    "name": "[M] Competition"
+  },
+  {
+    "id": 736370,
+    "name": "[S] Situation"
+  },
+  {
+    "id": 736371,
+    "name": "[S] Problem"
+  },
+  {
+    "id": 736372,
+    "name": "[S] Implication"
+  },
+  {
+    "id": 736373,
+    "name": "[S] Need-Payoff"
+  },
+  {
+    "id": 736374,
+    "name": "[A] Legutolsó releváns interakció"
+  },
+  {
+    "id": 736375,
+    "name": "[A] Deal Age (days)"
+  },
+  {
+    "id": 736376,
+    "name": "[A] Stalled Deal"
+  },
+  {
+    "id": 736377,
+    "name": "[A] Next Step"
+  },
+  {
+    "id": 736378,
+    "name": "[A] Next Step Date"
+  },
+  {
+    "id": 736764,
+    "name": "[BC] JTM%"
+  },
+  {
+    "id": 736765,
+    "name": "[BC] LTV%"
+  },
+  {
+    "id": 736766,
+    "name": "[INC] Osztalék Lezárt Évek"
+  },
+  {
+    "id": 736767,
+    "name": "[INC] Külföldi Jövedelem"
+  },
+  {
+    "id": 736768,
+    "name": "[INC] Készpénz Jövedelem"
+  },
+  {
+    "id": 736769,
+    "name": "[INC] Vállalkozói Jövedelem"
+  },
+  {
+    "id": 736770,
+    "name": "[INC] Jövedelem Erre a Számlára Érkezik Mióta"
+  },
+  {
+    "id": 736771,
+    "name": "[INC] Jövedelem Érkezés Hónapok"
+  },
+  {
+    "id": 736772,
+    "name": "[INC] Próbaidő Vége"
+  },
+  {
+    "id": 736773,
+    "name": "[INC] Bankszámlakivonat Hónapok"
+  },
+  {
+    "id": 736774,
+    "name": "[INC] NAV Jövedelemigazolás Elérhető"
+  },
+  {
+    "id": 736775,
+    "name": "[INC] Vállalkozás Alapítás Dátuma"
+  },
+  {
+    "id": 736776,
+    "name": "[INC] Tulajdoni Hányad %"
+  },
+  {
+    "id": 736777,
+    "name": "[INC] Utolsó Lezárt Év Árbevétel"
+  },
+  {
+    "id": 736778,
+    "name": "[INC] Utolsó 12 Havi Számlaforgalom"
+  },
+  {
+    "id": 736779,
+    "name": "[INC] Lezárt Üzleti Évek"
+  },
+  {
+    "id": 736780,
+    "name": "[INC] Adóbevallás Elérhető Évek"
+  },
+  {
+    "id": 736781,
+    "name": "[INC] Üzleti Bankszámlakivonat Hónapok"
+  },
+  {
+    "id": 736782,
+    "name": "[INC] Cégkivonat Elérhető"
+  },
+  {
+    "id": 736786,
+    "name": "[PROP] Falazat Típusa"
+  },
+  {
+    "id": 736787,
+    "name": "[PROP] Ingatlantípus"
+  },
+  {
+    "id": 736788,
+    "name": "[INC] Jövedelem Érkezési Számla Tulajdonos"
+  },
+  {
+    "id": 736789,
+    "name": "[INC] Jövedelem Érkezési Számla Kapcsolat"
+  },
+  {
+    "id": 736790,
+    "name": "[INC] Elsődleges Jövedelem Típusa"
+  },
+  {
+    "id": 736791,
+    "name": "[INC] Másodlagos Jövedelem Típusa"
+  },
+  {
+    "id": 736792,
+    "name": "[INC] Munkaviszony Típusa"
+  },
+  {
+    "id": 736793,
+    "name": "[INC] Adózási Forma"
+  },
+  {
+    "id": 736794,
+    "name": "[INC] Cégforma"
+  },
+  {
+    "id": 736795,
+    "name": "[INC] Munkáltatói Igazolás Elérhető"
+  },
+  {
+    "id": 736796,
+    "name": "[INC] Külföldi Munkaszerződés Elérhető"
+  },
+  {
+    "id": 736797,
+    "name": "[INC] Külföldi Adóigazolás Elérhető"
+  },
+  {
+    "id": 736798,
+    "name": "[INC] Osztalék Igazolás Elérhető"
+  },
+  {
+    "id": 736799,
+    "name": "[INC] Osztalék Határozat Elérhető"
+  },
+  {
+    "id": 736800,
+    "name": "[INC] KHR Riport Ellenőrizve"
+  },
+  {
+    "id": 736801,
+    "name": "[INC] Meglévő Tartozások Összesen"
+  },
+  {
+    "id": 736802,
+    "name": "[INC] Szociális Jövedelem Típusa"
+  },
+  {
+    "id": 736803,
+    "name": "[INC] Szociális Jövedelem Havi Összeg"
+  },
+  {
+    "id": 736804,
+    "name": "[INC] Szociális Jövedelem Vége"
+  },
+  {
+    "id": 736805,
+    "name": "[INC] Ellátás Határozat Elérhető"
+  },
+  {
+    "id": 736806,
+    "name": "[INC] Szociális Jövedelem Bankszámlára Érkezik"
+  },
+  {
+    "id": 736807,
+    "name": "[INC] Családi Pótlék Összeg"
+  },
+  {
+    "id": 736808,
+    "name": "[INC] Tartásdíj Összeg"
+  },
+  {
+    "id": 736809,
+    "name": "[INC] Tartásdíj Igazolható"
+  },
+  {
+    "id": 736810,
+    "name": "[DOCS] Dokumentáció Készültség %"
+  },
+  {
+    "id": 736811,
+    "name": "[DOCS] Tulajdoni Lap Elérhető"
+  },
+  {
+    "id": 736812,
+    "name": "[DOCS] Értékbecslés Elérhető"
+  },
+  {
+    "id": 736813,
+    "name": "[DOCS] Lakásbiztosítás Ajánlat Elérhető"
+  },
+  {
+    "id": 736814,
+    "name": "[BANK] Kiválasztott Bank"
+  },
+  {
+    "id": 736815,
+    "name": "[CREDIT] KHR Status"
+  },
+  {
+    "id": 736816,
+    "name": "[FIN] Becsült Törlesztő Költség"
+  },
+  {
+    "id": 736817,
+    "name": "[FIN] Szerződés Aláírási Szándék"
+  }
+]
