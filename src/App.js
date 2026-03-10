@@ -175,11 +175,45 @@ function App() {
     }
   };
 
+  // Save data to Copper CRM
+  const saveToCopperCRM = (fieldName, value) => {
+    try {
+      if (!window.CopperSdk) {
+        console.log('ℹ️ Development mode - not saving to Copper:', { fieldName, value });
+        return;
+      }
+
+      // Extract field ID from field name (e.g., "[CREDIT] KHR Status" → field ID)
+      const updateData = {};
+      updateData[fieldName] = value;
+      
+      console.log('💾 Saving to Copper:', { fieldName, value });
+      
+      // Copper SDK save - context-aware update
+      if (window.CopperSdk.save) {
+        window.CopperSdk.save(updateData);
+      }
+    } catch (error) {
+      console.log('⚠️ Could not save to Copper:', error.message);
+    }
+  };
+
   const handleAnswer = (questionId, answer) => {
-    setAnswers({
+    // Find the field name for this question
+    const allQuestions = [...criticalQuestions, ...importantQuestions, ...optionalQuestions];
+    const question = allQuestions.find(q => q.id === questionId);
+    
+    // Update local state
+    const newAnswers = {
       ...answers,
       [questionId]: answer
-    });
+    };
+    setAnswers(newAnswers);
+    
+    // Save to Copper immediately
+    if (question?.field) {
+      saveToCopperCRM(question.field, answer);
+    }
   };
 
   const calculateQualification = () => {
@@ -227,12 +261,21 @@ function App() {
       decision = 'WAIT - Review Required';
     }
 
-    setQualification({
+    const finalScore = Math.max(0, Math.min(100, 50 + score));
+
+    const qualificationResult = {
       decision,
-      score: Math.max(0, Math.min(100, 50 + score)),
+      score: finalScore,
       issues,
       completedQuestions: Object.keys(answers).length
-    });
+    };
+
+    setQualification(qualificationResult);
+
+    // Save qualification result to Copper
+    saveToCopperCRM('[BC] Minősítési Döntés', decision);
+    saveToCopperCRM('[BC] Minősítési Pontszám', finalScore);
+    saveToCopperCRM('[BC] Elbírálási Megjegyzések', issues.join(' | '));
   };
 
   const progressPercentage = (Object.keys(answers).length / getPhaseQuestions().length) * 100;
