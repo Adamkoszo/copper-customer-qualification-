@@ -10,49 +10,77 @@ function App() {
 
   // Copper SDK integration
   useEffect(() => {
-    // Wait for Copper SDK to be available
-    let sdkFound = false;
-    
-    const checkCopperSDK = setInterval(() => {
+    // Try multiple ways to get Copper context
+    const initializeCopperContext = async () => {
+      let contextLoaded = false;
+
+      // Method 1: Try CopperSdk (most common)
       if (window.CopperSdk) {
-        sdkFound = true;
-        clearInterval(checkCopperSDK);
         try {
           const context = window.CopperSdk.getContext();
-          setCopperContext(context);
-          console.log('✅ Copper context loaded:', context);
-          setLoading(false);
+          if (context && context.entityId) {
+            setCopperContext(context);
+            console.log('✅ Copper context loaded via CopperSdk:', context);
+            setLoading(false);
+            return;
+          }
         } catch (error) {
-          console.log('⚠️ Copper SDK context not available (development mode)');
-          // For development/testing - use mock context
-          setCopperContext({
-            entityId: 'test-123',
-            entityType: 'Lead',
-            data: { name: 'Test Customer' }
-          });
-          setLoading(false);
+          console.log('⚠️ CopperSdk.getContext() failed:', error.message);
         }
       }
-    }, 100);
 
-    // Timeout: if SDK not found after 2 seconds, use fallback (development mode)
-    const timeout = setTimeout(() => {
-      if (!sdkFound) {
-        clearInterval(checkCopperSDK);
-        console.log('⚠️ Copper SDK not found - using development fallback');
-        setCopperContext({
-          entityId: 'test-123',
-          entityType: 'Lead',
-          data: { name: 'Test Customer' }
-        });
-        setLoading(false);
+      // Method 2: Try to get from window.location or URL params
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const entityId = urlParams.get('entity_id') || urlParams.get('entityId');
+        const entityName = urlParams.get('entity_name') || urlParams.get('entityName');
+        const entityType = urlParams.get('entity_type') || urlParams.get('entityType') || 'Lead';
+
+        if (entityId) {
+          const urlContext = {
+            entityId,
+            entityType,
+            data: { name: entityName || 'Customer' }
+          };
+          setCopperContext(urlContext);
+          console.log('✅ Copper context loaded via URL params:', urlContext);
+          setLoading(false);
+          return;
+        }
+      } catch (error) {
+        console.log('⚠️ URL param extraction failed:', error.message);
       }
-    }, 2000);
 
-    return () => {
-      clearInterval(checkCopperSDK);
-      clearTimeout(timeout);
+      // Method 3: Wait for SDK with loop (up to 3 seconds)
+      for (let i = 0; i < 30; i++) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        if (window.CopperSdk) {
+          try {
+            const context = window.CopperSdk.getContext();
+            if (context && context.entityId) {
+              setCopperContext(context);
+              console.log('✅ Copper context loaded after retry:', context);
+              setLoading(false);
+              return;
+            }
+          } catch (e) {
+            // Continue trying
+          }
+        }
+      }
+
+      // Fallback: Use test data if nothing else worked
+      console.log('⚠️ No Copper context found - using test data (you may be testing outside Copper)');
+      setCopperContext({
+        entityId: 'test-123',
+        entityType: 'Lead',
+        data: { name: 'Test Customer' }
+      });
+      setLoading(false);
     };
+
+    initializeCopperContext();
   }, []);
 
   // CRITICAL PHASE Questions (3-5 min)
