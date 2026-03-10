@@ -11,8 +11,11 @@ function App() {
   // Copper SDK integration
   useEffect(() => {
     // Wait for Copper SDK to be available
+    let sdkFound = false;
+    
     const checkCopperSDK = setInterval(() => {
       if (window.CopperSdk) {
+        sdkFound = true;
         clearInterval(checkCopperSDK);
         try {
           const context = window.CopperSdk.getContext();
@@ -32,7 +35,24 @@ function App() {
       }
     }, 100);
 
-    return () => clearInterval(checkCopperSDK);
+    // Timeout: if SDK not found after 2 seconds, use fallback (development mode)
+    const timeout = setTimeout(() => {
+      if (!sdkFound) {
+        clearInterval(checkCopperSDK);
+        console.log('⚠️ Copper SDK not found - using development fallback');
+        setCopperContext({
+          entityId: 'test-123',
+          entityType: 'Lead',
+          data: { name: 'Test Customer' }
+        });
+        setLoading(false);
+      }
+    }, 2000);
+
+    return () => {
+      clearInterval(checkCopperSDK);
+      clearTimeout(timeout);
+    };
   }, []);
 
   // CRITICAL PHASE Questions (3-5 min)
