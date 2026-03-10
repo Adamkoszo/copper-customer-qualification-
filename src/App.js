@@ -12,7 +12,9 @@ function App() {
   useEffect(() => {
     // Try multiple ways to get Copper context
     const initializeCopperContext = async () => {
-      // Method 1: Try CopperSdk (most common)
+      console.log('🔍 Checking for Copper SDK...', Object.keys(window).filter(k => k.toLowerCase().includes('copper')));
+
+      // Method 1: Try CopperSdk (camelCase - most common)
       if (window.CopperSdk) {
         try {
           const context = window.CopperSdk.getContext();
@@ -24,6 +26,21 @@ function App() {
           }
         } catch (error) {
           console.log('⚠️ CopperSdk.getContext() failed:', error.message);
+        }
+      }
+
+      // Method 1b: Try CopperSDK (capital SDK)
+      if (window.CopperSDK) {
+        try {
+          const context = window.CopperSDK.getContext();
+          if (context && context.entityId) {
+            setCopperContext(context);
+            console.log('✅ Copper context loaded via CopperSDK:', context);
+            setLoading(false);
+            return;
+          }
+        } catch (error) {
+          console.log('⚠️ CopperSDK.getContext() failed:', error.message);
         }
       }
 
@@ -49,13 +66,14 @@ function App() {
         console.log('⚠️ URL param extraction failed:', error.message);
       }
 
-      // Method 3: Wait for SDK with loop (up to 3 seconds)
-      for (let i = 0; i < 30; i++) {
+      // Method 3: Wait for SDK with extended loop (up to 5 seconds)
+      for (let i = 0; i < 50; i++) {
         await new Promise(resolve => setTimeout(resolve, 100));
         
-        if (window.CopperSdk) {
+        if (window.CopperSdk || window.CopperSDK) {
           try {
-            const context = window.CopperSdk.getContext();
+            const sdk = window.CopperSdk || window.CopperSDK;
+            const context = sdk.getContext();
             if (context && context.entityId) {
               setCopperContext(context);
               console.log('✅ Copper context loaded after retry:', context);
@@ -69,7 +87,10 @@ function App() {
       }
 
       // Fallback: Use test data if nothing else worked
-      console.log('⚠️ No Copper context found - using test data (you may be testing outside Copper)');
+      console.log('⚠️ No Copper context found after 5 seconds - using test data');
+      console.log('📍 window.location.href:', window.location.href);
+      console.log('📍 Available window properties:', Object.keys(window).filter(k => k.toLowerCase().includes('copper') || k.toLowerCase().includes('app')).slice(0, 10));
+      
       setCopperContext({
         entityId: 'test-123',
         entityType: 'Lead',
