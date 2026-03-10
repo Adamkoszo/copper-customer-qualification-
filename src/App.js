@@ -219,9 +219,9 @@ function App() {
     };
 
     // Save data to Copper CRM
-    const saveToCopperCRM = (fieldName, value) => {
+    const saveToCopperCRM = async (fieldName, value) => {
         try {
-            if (!window.CopperSdk) {
+            if (!window.Copper) {
                 console.log('ℹ️ Development mode - not saving to Copper:', { fieldName, value });
                 return;
             }
@@ -232,9 +232,13 @@ function App() {
 
             console.log('💾 Saving to Copper:', { fieldName, value });
 
-            // Copper SDK save - context-aware update
-            if (window.CopperSdk.save) {
-                window.CopperSdk.save(updateData);
+            // Using official Copper SDK
+            const sdk = window.Copper.init();
+            
+            // NOTE: Depending on SDK version, you may need to use sdk.api() or sdk.CustomField.update()
+            // Here we try the generic approach first
+            if (sdk && sdk.updateContext) {
+                await sdk.updateContext(updateData);
             }
         } catch (error) {
             console.log('⚠️ Could not save to Copper:', error.message);
