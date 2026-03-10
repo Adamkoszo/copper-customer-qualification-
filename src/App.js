@@ -12,8 +12,6 @@ function App() {
   useEffect(() => {
     // Try multiple ways to get Copper context
     const initializeCopperContext = async () => {
-      let contextLoaded = false;
-
       // Method 1: Try CopperSdk (most common)
       if (window.CopperSdk) {
         try {
